@@ -17,9 +17,8 @@ import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj.motorcontrol.PWMMotorController;
 import edu.wpi.first.wpilibj.motorcontrol.PWMTalonSRX;
 import frc.robot.Constants;
+
 public class DriveTrain extends SubsystemBase{
-
-
     PWMTalonSRX pwmMotorControllerLeftMotor = new PWMTalonSRX(Constants.OperatorConstants.rightMotorPort);
     PWMTalonSRX pwmMotorControllerRightMotor = new PWMTalonSRX(Constants.OperatorConstants.leftMotorPort);
     DifferentialDrive differentialDrive = new DifferentialDrive(pwmMotorControllerLeftMotor,pwmMotorControllerRightMotor);
