@@ -19,6 +19,7 @@ public final class Constants {
     public static final int kDriverControllerPort = 0;
     public static final int rightMotorPort = 20;
     public static final int leftMotorPort = 21;
-    public static final int armMotorPort = 22; 
+    public static final int armMotorPort = 22;
+    public static final int rollerID = 23;
   }
 }

@@ -8,6 +8,8 @@ public class Arm extends SubsystemBase{
     PWMSparkMax armMotorPwmSparkMax = new PWMSparkMax(Constants.OperatorConstants.armMotorPort);
     public Arm () {}
    
-    public static armMove( )
+    // public void static armMove(\) {
+
+    // }
 
 }

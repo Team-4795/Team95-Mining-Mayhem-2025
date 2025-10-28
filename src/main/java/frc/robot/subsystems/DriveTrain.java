@@ -25,9 +25,7 @@ public class DriveTrain extends SubsystemBase{
 
     public DriveTrain() {}
 
-    @Override
-    public void periodic()
-    {
-        differentialDrive.arcadeDriveIK(xboxController.getLeftY(), xbox_Controller.getLeftX(), false);
+    public void arcadeDrive(double xRotation,double zRotation){
+        differentialDrive.arcadeDrive(xRotation, zRotation, false);
     }
 }
