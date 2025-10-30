@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Arm extends SubsystemBase{
-    PWMSparkMax armMotorPwmSparkMax = new PWMSparkMax(Constants.OperatorConstants.armMotorPort);
+    PWMSparkMax armMotorPwmSparkMax = new PWMSparkMax(Constants.ArmConstants.armMotorPort);
     public Arm () {}
    
     // public void static armMove(\) {

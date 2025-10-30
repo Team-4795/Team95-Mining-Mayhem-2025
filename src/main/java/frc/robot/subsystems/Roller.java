@@ -8,36 +8,29 @@ import edu.wpi.first.wpilibj.motorcontrol.PWMMotorController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-
 import com.revrobotics.spark.SparkLowLevel;
 import com.revrobotics.spark.SparkMax;
 import frc.robot.Constants;
-public class Roller extends SubsystemBase {
-  /** Creates a new ExampleSubsystem. */
-  public Roller() {}
-  // 0-Read for intake 1- Intaking 2-Has ball 3-Output
-  private int rollerState = 0;
-  SparkMax rollerMotor = new SparkMax(Constants.OperatorConstants.rightMotorPort, SparkLowLevel.MotorType.kBrushless);
 
-  public void changeState()
+public class Roller extends SubsystemBase {
+  /** Creates a new Roller Subsystem. */
+  SparkMax rollerMotor;
+  public Roller() {
+    rollerMotor = new SparkMax(Constants.RollerConstants.rightMotorPort, SparkLowLevel.MotorType.kBrushless);
+  }
+  // 0-Ready for intake 1- Intaking 2-Has ball 3-Output
+
+  public void intake()
   {
-    rollerState += 1;
-    if (rollerState == 4){
-      rollerState = 0;
-    }
+    rollerMotor.setVoltage(Constants.DriverConstants.rollerVoltage);
+  }
+  public void outtake(){
+    rollerMotor.setVoltage(-Constants.DriverConstants.rollerVoltage);
   }
 
   public void setRollerVoltage(){
-    if (rollerState == 0 || rollerState == 2){
-      rollerMotor.setVoltage(rollerState);
-    }
-    else if (rollerState == 1){
-      rollerMotor.setVoltage(12);
-    }
-    else{
-      rollerMotor.setVoltage(-12);
-    }
-   
+    rollerMotor.setVoltage(0);
   }
+  
 
 }

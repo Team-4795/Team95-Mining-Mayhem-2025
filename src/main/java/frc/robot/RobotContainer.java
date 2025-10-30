@@ -62,8 +62,10 @@ public class RobotContainer {
 
     roller.setDefaultCommand(Commands.run(() -> roller.setRollerVoltage(), roller));
 
-    m_driverController.a().onTrue(Commands.run(roller.setDefaultCommand(Commands.run(() -> roller.changeState(), roller));
-    ));
+    m_driverController.leftTrigger().whileTrue(Commands.run(() -> roller.intake(),roller));
+
+    m_driverController.rightTrigger().whileTrue(Commands.run(() -> roller.outtake(),roller));
+
   }
 
   /**
