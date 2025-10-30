@@ -26,10 +26,14 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final DriveTrain driveTrain = new DriveTrain();
   private final Roller roller = new Roller();
+  private final Arm arm = new Arm();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
+
+  private final OperatorXboxController operatorController =
+      new OperatorXboxController(OperatorConstants.kOperatorControllerPort);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -54,6 +58,9 @@ public class RobotContainer {
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is presserd,
     // cancelling on release.
     m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+
+    operatorController.LeftBumper().whileTrue(arm.armUp());
+    operatorController.RightBumper().whileTrue(arm.armDown());
     
     driveTrain.setDefaultCommand(
       Commands.run(
