@@ -8,8 +8,14 @@ public class Arm extends SubsystemBase{
     PWMSparkMax armMotorPwmSparkMax = new PWMSparkMax(Constants.ArmConstants.armMotorPort);
     public Arm () {}
    
-    // public void static armMove(\) {
-
-    // }
+    public void armUp(){
+        armMotorPwmSparkMax.setVoltage(0.5);
+    }
+    public void armDown(){
+        armMotorPwmSparkMax.setVoltage(-0.5);
+    }
+    public void armStop(){
+        armMotorPwmSparkMax.setVoltage(0);
+    }
 
 }
