@@ -16,7 +16,7 @@ public class Roller extends SubsystemBase {
   /** Creates a new Roller Subsystem. */
   SparkMax rollerMotor;
   public Roller() {
-    rollerMotor = new SparkMax(Constants.RollerConstants.rightMotorPort, SparkLowLevel.MotorType.kBrushless);
+    rollerMotor = new SparkMax(Constants.RollerConstants.rollerID, SparkLowLevel.MotorType.kBrushless);
   }
   // 0-Ready for intake 1- Intaking 2-Has ball 3-Output
 
