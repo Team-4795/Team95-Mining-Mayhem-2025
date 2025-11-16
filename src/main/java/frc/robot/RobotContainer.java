@@ -5,8 +5,9 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.Autos;
+import frc.robot.commands.forward;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Roller;
@@ -32,8 +33,8 @@ public class RobotContainer {
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
-  private final OperatorXboxController operatorController =
-      new OperatorXboxController(OperatorConstants.kOperatorControllerPort);
+  private final CommandXboxController operatorController =
+      new CommandXboxController(OperatorConstants.kOperatorControllerPort);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -59,8 +60,8 @@ public class RobotContainer {
     // cancelling on release.
     m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
-    operatorController.LeftBumper().whileTrue(arm.armUp());
-    operatorController.RightBumper().whileTrue(arm.armDown());
+    operatorController.leftBumper().whileTrue(Commands.run(() -> arm.armUp()));
+    operatorController.rightBumper().whileTrue(Commands.run(() -> arm.armDown()));
     
     driveTrain.setDefaultCommand(
       Commands.run(
@@ -80,8 +81,4 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
-    // An example command will be run in autonomous
-    return Autos.exampleAuto(m_exampleSubsystem);
-  }
 }
