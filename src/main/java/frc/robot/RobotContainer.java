@@ -5,7 +5,7 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.forward;
+import frc.robot.commands.AutoCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.DriveTrain;
@@ -28,6 +28,7 @@ public class RobotContainer {
   private final DriveTrain driveTrain = new DriveTrain();
   private final Roller roller = new Roller();
   private final Arm arm = new Arm();
+  private final AutoCommand autoCommand = new AutoCommand(driveTrain, arm, roller,0.5 , 0.5, 0.5);
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
@@ -60,19 +61,20 @@ public class RobotContainer {
     // cancelling on release.
     m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
-    operatorController.leftBumper().whileTrue(Commands.run(() -> arm.armUp()));
-    operatorController.rightBumper().whileTrue(Commands.run(() -> arm.armDown()));
+    operatorController.leftBumper().whileTrue(arm.armUp(Constants.ArmConstants.defaultArmVoltage));
+    operatorController.rightBumper().whileTrue(arm.armDown(Constants.ArmConstants.defaultArmVoltage));
+    arm.setDefaultCommand(arm.armStop());
     
     driveTrain.setDefaultCommand(
       Commands.run(
         () -> driveTrain.arcadeDrive(m_driverController.getLeftY(), m_driverController.getLeftX()), 
         driveTrain));
 
-    roller.setDefaultCommand(Commands.run(() -> roller.setRollerVoltage(), roller));
+    roller.setDefaultCommand(roller.setRollerVoltage(0));
 
-    m_driverController.leftTrigger().whileTrue(Commands.run(() -> roller.intake(),roller));
+    m_driverController.leftTrigger().whileTrue(roller.intake(1));
 
-    m_driverController.rightTrigger().whileTrue(Commands.run(() -> roller.outtake(),roller));
+    m_driverController.rightTrigger().whileTrue(roller.outtake(1));
 
   }
 
@@ -81,4 +83,8 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
+  public Command getAutonomousCommand() {
+    // An example command will be run in autonomous
+    return autoCommand.autoSequence(Constants.autoConstants.autoPlan);
+  }
 }

@@ -3,6 +3,8 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import com.revrobotics.spark.SparkLowLevel;
@@ -16,16 +18,16 @@ public class Roller extends SubsystemBase {
   }
   // 0-Ready for intake 1- Intaking 2-Has ball 3-Output
 
-  public void intake()
+  public Command intake(double modifier)
   {
-    rollerMotor.setVoltage(Constants.DriverConstants.rollerVoltage);
+    return Commands.run(() -> rollerMotor.setVoltage(Constants.DriverConstants.rollerVoltage*modifier), this);
   }
-  public void outtake(){
-    rollerMotor.setVoltage(-Constants.DriverConstants.rollerVoltage);
+  public Command outtake(double modifier){
+    return Commands.run(() -> rollerMotor.setVoltage(-Constants.DriverConstants.rollerVoltage*modifier), this);
   }
 
-  public void setRollerVoltage(){
-    rollerMotor.setVoltage(0);
+  public Command setRollerVoltage(double voltage){
+    return Commands.run(() -> rollerMotor.setVoltage(voltage), this);
   }
   
 

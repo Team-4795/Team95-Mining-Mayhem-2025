@@ -4,7 +4,6 @@
 
 package frc.robot;
 
-import java.lang.Thread.State;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -17,6 +16,7 @@ import java.lang.Thread.State;
 public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
+    public static final int kOperatorControllerPort = 0;
   }
   public static class RollerConstants {
     public static final int rollerID = 23;
@@ -27,10 +27,17 @@ public final class Constants {
   }
 
   public static class DriverConstants {
-    public static final double rollerVoltage = 12;
+    public static final double rollerVoltage = 3;
   }
 
   public static class ArmConstants {
     public static final int armMotorPort = 22;
+    public static final int defaultArmVoltage = 2;
+  }
+
+  public static class autoConstants {
+    public static final int autoPlan = 1;
+    public static final double distancePerSecond = 5;
+    public static final double degreesPerSecond = 5;
   }
 }
