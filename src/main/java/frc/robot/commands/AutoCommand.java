@@ -39,7 +39,12 @@ public final class AutoCommand extends Command{
   public Command autoSequence(int driveTrainPlan) {
     if (driveTrainPlan == 1){
       // Auto Plan 1
-      return Commands.sequence(  
+      //Commands.sequence(command1,
+      //command2,
+      //command3...)
+
+      return Commands.sequence(
+        
         this.arm.armUp(this.armSpeed),
         Commands.waitSeconds(2),
         this.arm.armStop(),
@@ -47,22 +52,45 @@ public final class AutoCommand extends Command{
         this.arm.armDown(this.armSpeed),
         this.driveTrain.powerDriveTrain(-this.driveTrainSpeed, -this.driveTrainSpeed),
         Commands.waitSeconds(2),
+        this.driveTrain.powerDriveTrain(this.driveTrainSpeed, this.driveTrainSpeed),
+        Commands.waitSeconds(0.3),
         this.arm.armStop(),
         //Moves Backward
-        Commands.waitSeconds(1 /*Distance To ball y*/ / Constants.autoConstants.distancePerSecond),
+        Commands.waitSeconds(1 /*Distance To ball y*/ / Constants.autoConstants.distancePerSecond-2),
         //Turns 90 degress
+        this.driveTrain.powerDriveTrain(this.driveTrainSpeed, this.driveTrainSpeed),
+        Commands.waitSeconds(0.3),
         this.driveTrain.powerDriveTrain(this.driveTrainSpeed, -this.driveTrainSpeed),
         Commands.waitSeconds(90/Constants.autoConstants.degreesPerSecond),
+        this.driveTrain.powerDriveTrain(-this.driveTrainSpeed, this.driveTrainSpeed),
+        Commands.waitSeconds(0.3),
         //Moving to mid
         this.roller.intake(1),
         this.driveTrain.powerDriveTrain(this.driveTrainSpeed, this.driveTrainSpeed),
         Commands.waitSeconds(1 /*Distance To ball x*// Constants.autoConstants.distancePerSecond),
-        this.driveTrain.powerDriveTrain(this.driveTrainSpeed, this.driveTrainSpeed),
+        this.driveTrain.powerDriveTrain(-this.driveTrainSpeed, -this.driveTrainSpeed),
+        Commands.waitSeconds(0.3),
         this.roller.setRollerVoltage(0),
         this.driveTrain.powerDriveTrain(-this.driveTrainSpeed, -this.driveTrainSpeed),
         Commands.waitSeconds(1 /*Distance To ball x*// Constants.autoConstants.distancePerSecond),
-        this.roller.outtake(0.2)
+        this.driveTrain.powerDriveTrain(this.driveTrainSpeed, this.driveTrainSpeed),
+        Commands.waitSeconds(0.3),
+        this.driveTrain.powerDriveTrain(this.driveTrainSpeed, -this.driveTrainSpeed),
+        Commands.waitSeconds(90/Constants.autoConstants.degreesPerSecond),
+        this.driveTrain.powerDriveTrain(-this.driveTrainSpeed, this.driveTrainSpeed),
+        Commands.waitSeconds(0.3),
 
+        this.roller.outtake(0.2),
+        Commands.waitSeconds(0.3),
+        this.driveTrain.powerDriveTrain(-this.driveTrainSpeed, this.driveTrainSpeed),
+        this.roller.setRollerVoltage(0),
+        Commands.waitSeconds(90/Constants.autoConstants.degreesPerSecond),
+        this.driveTrain.powerDriveTrain(this.driveTrainSpeed, -this.driveTrainSpeed),
+        Commands.waitSeconds(0.3),
+
+        this.driveTrain.powerDriveTrain(this.driveTrainSpeed, this.driveTrainSpeed),
+        Commands.waitSeconds(2),
+        this.driveTrain.powerDriveTrain(0, 0)
       );
     }
     else if (driveTrainPlan == 2){
@@ -86,7 +114,15 @@ public final class AutoCommand extends Command{
         this.driveTrain.powerDriveTrain(0, 0)
       );
     }
-    return null;
+    /*else{
+      return Commands.sequence(
+        this.arm.armUp(this.armSpeed),
+        Commands.waitSeconds(2),
+        this.arm.armDown(this.armSpeed),
+        Commands.waitSeconds(2)
+      );
+    }
+    */
   }
     
   

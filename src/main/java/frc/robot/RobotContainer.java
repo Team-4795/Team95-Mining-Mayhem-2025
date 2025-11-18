@@ -7,7 +7,10 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.AutoCommand;
 import frc.robot.commands.ExampleCommand;
+<<<<<<< Updated upstream
 import frc.robot.subsystems.Arm;
+=======
+>>>>>>> Stashed changes
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Roller;
@@ -26,9 +29,12 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final DriveTrain driveTrain = new DriveTrain();
+<<<<<<< Updated upstream
   private final Roller roller = new Roller();
   private final Arm arm = new Arm();
   private final AutoCommand autoCommand = new AutoCommand(driveTrain, arm, roller,0.5 , 0.5, 0.5);
+=======
+>>>>>>> Stashed changes
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
@@ -59,6 +65,8 @@ public class RobotContainer {
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is presserd,
     // cancelling on release.
+
+    driveTrain.setDefaultCommand(driveTrain.arcadeDriveCommand(m_driverController.getLeftY(), m_driverController.getLeftX()));
     m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
     operatorController.leftBumper().whileTrue(arm.armUp(Constants.ArmConstants.defaultArmVoltage));
